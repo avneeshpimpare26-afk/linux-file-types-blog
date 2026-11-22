@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A beginner-friendly guide to exploring Linux file types with ls -l and file commands.">
+  <title>Exploring Linux File Types | Shell Scripting Blog</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header" id="top">
+    <nav class="navbar container">
+      <a class="brand" href="#top"><span class="brand-icon">&gt;_</span><span>Linux<span class="brand-light">Notes</span></span></a>
+      <button class="menu-button" id="menuButton" aria-label="Open navigation">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#intro">Introduction</a>
+        <a href="#file-types">File Types</a>
+        <a href="#permissions">Permissions</a>
+        <a href="#practical">Practical</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-content">
+        <span class="eyebrow">SHELL SCRIPTING · MODULE 2</span>
+        <h1>Exploring Linux<br><span>File Types</span></h1>
+        <p class="hero-subtitle">Using the <code>ls -l</code> and <code>file</code> commands</p>
+        <p class="hero-text">A simple guide to understanding files, directories, permissions and file identification in Linux.</p>
+        <div class="hero-buttons">
+          <a class="button button-primary" href="#intro">Start Reading <span>→</span></a>
+          <a class="button button-outline" href="#practical">View Practical</a>
+        </div>
+        <div class="terminal-card hero-terminal">
+          <div class="terminal-top"><span></span><span></span><span></span><small>ubuntu@linux: ~</small></div>
+          <div class="terminal-body"><p><b>ubuntu@linux</b>:~$ ls -l</p><p class="terminal-muted">-rw-r--r--  notes.txt</p><p class="terminal-muted">drwxr-xr-x  projects</p><p><b>ubuntu@linux</b>:~$ <i class="cursor"></i></p></div>
+        </div>
+        <div class="hero-orb orb-one"></div><div class="hero-orb orb-two"></div>
+      </div>
+    </section>
+
+    <section class="intro-section section" id="intro">
+      <div class="container two-column">
+        <div>
+          <span class="section-label">01 / GETTING STARTED</span>
+          <h2>Why do Linux file types matter?</h2>
+          <p>Linux provides many useful commands through its terminal. When managing files, it is helpful to know whether an item is a regular file, directory, symbolic link, device file or another type.</p>
+          <p>The <code>ls -l</code> command displays detailed information, including a file type indicator and permissions. The <code>file</code> command gives a more descriptive identification based on the file's contents.</p>
+        </div>
+        <aside class="info-card">
+          <div class="info-icon">⌘</div>
+          <h3>What you will learn</h3>
+          <ul class="check-list">
+            <li>Recognise common Linux file types</li>
+            <li>Read the long listing format</li>
+            <li>Understand read, write and execute permissions</li>
+            <li>Identify a file using its content</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section objectives-section">
+      <div class="container">
+        <span class="section-label">02 / OBJECTIVES</span>
+        <h2>What are the objectives?</h2>
+        <div class="objective-grid">
+          <article class="objective-card"><span>01</span><p>Understand common Linux file types and the symbols used to represent them.</p></article>
+          <article class="objective-card"><span>02</span><p>Learn how <code>ls -l</code> displays permissions and other file information.</p></article>
+          <article class="objective-card"><span>03</span><p>Practise using the <code>file</code> command for file identification.</p></article>
+          <article class="objective-card"><span>04</span><p>Develop basic skills in using the Linux terminal for file inspection and management.</p></article>
+          <article class="objective-card"><span>05</span><p>Understand how Linux identifies files using their type and content, not only their names.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section file-types-section" id="file-types">
+      <div class="container">
+        <span class="section-label">03 / LINUX BASICS</span>
+        <h2>Understanding Linux file types</h2>
+        <p class="section-intro">The first character in the <code>ls -l</code> output indicates the type of item. Here are the common symbols.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Symbol</th><th>File type</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><span class="type-symbol">-</span></td><td>Regular file</td><td>Text, image, document, program or other file.</td></tr>
+              <tr><td><span class="type-symbol">d</span></td><td>Directory</td><td>A folder that contains files and other directories.</td></tr>
+              <tr><td><span class="type-symbol">l</span></td><td>Symbolic link</td><td>A shortcut-like link to another path.</td></tr>
+              <tr><td><span class="type-symbol">c</span></td><td>Character device</td><td>A device that works with a stream of bytes.</td></tr>
+              <tr><td><span class="type-symbol">b</span></td><td>Block device</td><td>A device that reads or writes data in fixed-size blocks.</td></tr>
+              <tr><td><span class="type-symbol">p</span></td><td>Named pipe (FIFO)</td><td>Used for communication between processes.</td></tr>
+              <tr><td><span class="type-symbol">s</span></td><td>Socket</td><td>Used for communication between processes or across a network.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note-box"><strong>Quick tip:</strong> If the first character is <code>d</code>, it is a directory. If it is <code>-</code>, it is a regular file.</div>
+      </div>
+    </section>
+
+    <section class="section command-section">
+      <div class="container two-column align-center">
+        <div>
+          <span class="section-label">04 / COMMAND 1</span>
+          <h2>Using the <code>ls</code> command</h2>
+          <p>The <code>ls</code> command lists the contents of a directory. It displays the names of files and folders in the current location.</p>
+          <p>When we use <code>ls -l</code>, it displays the information in long format. This includes the file type, permissions, owner, group, size, modification date and file name.</p>
+        </div>
+        <div class="terminal-card">
+          <div class="terminal-top"><span></span><span></span><span></span><small>Terminal</small></div>
+          <div class="terminal-body"><p><b>ubuntu@ubuntu</b>:~$ ls</p><p class="terminal-output">Desktop&nbsp;&nbsp; Documents&nbsp;&nbsp; Downloads</p><p class="terminal-output">Music&nbsp;&nbsp; Pictures&nbsp;&nbsp; notes.txt</p><br><p><b>ubuntu@ubuntu</b>:~$ ls -l</p><p class="terminal-muted">-rw-r--r-- 1 ubuntu ubuntu 24 notes.txt</p><p class="terminal-muted">drwxr-xr-x 2 ubuntu ubuntu 60 projects</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section permissions-section" id="permissions">
+      <div class="container">
+        <span class="section-label">05 / FILE PERMISSIONS</span>
+        <h2>Read, write and execute</h2>
+        <p class="section-intro">The next nine characters in a long listing show permissions in three groups: owner, group and others.</p>
+        <div class="permission-layout">
+          <div class="permission-code"><span class="file-kind">-</span><span class="owner">rw-</span><span class="group">r--</span><span class="others">r--</span></div>
+          <div class="permission-details">
+            <div><b class="owner-text">Owner</b><p>Permissions for the user who owns the file.</p></div>
+            <div><b class="group-text">Group</b><p>Permissions for users in the file's group.</p></div>
+            <div><b class="others-text">Others</b><p>Permissions for other users.</p></div>
+          </div>
+        </div>
+        <div class="permission-grid">
+          <article class="mini-card"><span class="permission-letter">r</span><div><h3>Read</h3><p>Allows a user to view or read the file.</p></div></article>
+          <article class="mini-card"><span class="permission-letter">w</span><div><h3>Write</h3><p>Allows a user to make changes to the file.</p></div></article>
+          <article class="mini-card"><span class="permission-letter">x</span><div><h3>Execute</h3><p>Allows a user to run the file as a program.</p></div></article>
+        </div>
+        <div class="note-box"><strong>Example:</strong> <code>-rw-r--r--</code> means the owner has read and write permission, while the group and others have read permission.</div>
+      </div>
+    </section>
+
+    <section class="section file-command-section">
+      <div class="container two-column align-center">
+        <div class="terminal-card">
+          <div class="terminal-top"><span></span><span></span><span></span><small>Terminal</small></div>
+          <div class="terminal-body"><p><b>ubuntu@ubuntu</b>:~$ file notes.txt</p><p class="terminal-success">notes.txt: ASCII text</p><p><b>ubuntu@ubuntu</b>:~$ file hello.sh</p><p class="terminal-success">hello.sh: Bourne-Again shell script, ASCII text executable</p></div>
+        </div>
+        <div>
+          <span class="section-label">06 / COMMAND 2</span>
+          <h2>What does the <code>file</code> command do?</h2>
+          <p>The <code>file</code> command is used with a filename. It examines information and recognisable content patterns to identify the file's type or format.</p>
+          <p>This is useful when a file extension is missing or does not accurately describe the file. It helps us understand what kind of file we are working with.</p>
+          <div class="inline-command"><code>file filename</code><button class="copy-button" data-copy="file filename">Copy</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section practical-section" id="practical">
+      <div class="container">
+        <span class="section-label">07 / PRACTICAL IMPLEMENTATION</span>
+        <h2>Let's try it in the terminal</h2>
+        <p class="section-intro">The following steps create sample files and then inspect them using <code>ls -l</code> and <code>file</code>.</p>
+        <div class="steps-list">
+          <article class="step"><span>1</span><div><h3>Start the shell script</h3><pre><code>#!/bin/bash</code></pre><p>This line specifies that the script should be executed using the Bash shell.</p></div></article>
+          <article class="step"><span>2</span><div><h3>Create a directory</h3><pre><code>mkdir filetype</code></pre><p>Creates a new directory named <code>filetype</code> to store the sample items.</p></div></article>
+          <article class="step"><span>3</span><div><h3>Enter the directory</h3><pre><code>cd filetype</code></pre><p>Changes the current working directory to <code>filetype</code>.</p></div></article>
+          <article class="step"><span>4</span><div><h3>Create a text file</h3><pre><code>echo 'This is a text file.' &gt; notes.txt</code></pre><p>Creates <code>notes.txt</code> and writes the given text into it. The <code>&gt;</code> operator redirects output into the file.</p></div></article>
+          <article class="step"><span>5</span><div><h3>Create a shell script file</h3><pre><code>printf '#!/bin/bash\necho "Hello from script"\n' &gt; hello.sh</code></pre><p>Creates <code>hello.sh</code> with a Bash instruction and a simple message.</p></div></article>
+          <article class="step"><span>6</span><div><h3>Give execute permission</h3><pre><code>chmod +x hello.sh</code></pre><p>Adds execute permission to the shell script.</p></div></article>
+          <article class="step"><span>7</span><div><h3>Create a subdirectory</h3><pre><code>mkdir projects</code></pre><p>Creates another directory named <code>projects</code> inside <code>filetype</code>.</p></div></article>
+          <article class="step"><span>8</span><div><h3>Display detailed file information</h3><pre><code>ls -l</code></pre><p>Displays the file type indicator, permissions, ownership, size, modification date and name.</p></div></article>
+          <article class="step"><span>9</span><div><h3>Identify the file types</h3><pre><code>file notes.txt hello.sh projects</code></pre><p>Examines the specified items and displays information about their file types or contents.</p></div></article>
+        </div>
+        <div class="output-card">
+          <h3>Sample output</h3>
+          <pre><code>-rwxr-xr-x  hello.sh
+-rw-r--r--  notes.txt
+drwxr-xr-x  projects
+
+notes.txt: ASCII text
+hello.sh: Bourne-Again shell script, ASCII text executable
+projects: directory</code></pre>
+          <p class="small-note">The exact owner, group, size and date values may differ on your system.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section applications-section">
+      <div class="container">
+        <span class="section-label">08 / WHERE IT IS USED</span>
+        <h2>Real-world applications</h2>
+        <div class="application-grid">
+          <article><span>01</span><h3>File Management</h3><p>View files and directories with their permissions, size and ownership.</p></article>
+          <article><span>02</span><h3>System Administration</h3><p>Check file ownership and permissions while managing Linux systems.</p></article>
+          <article><span>03</span><h3>Permission Checking</h3><p>Understand who can read, modify or execute a file.</p></article>
+          <article><span>04</span><h3>File Identification</h3><p>Identify the actual type of a file, such as text, script or image.</p></article>
+          <article><span>05</span><h3>Troubleshooting</h3><p>Inspect file types and permissions when access or execution problems occur.</p></article>
+          <article><span>06</span><h3>Cybersecurity</h3><p>Examine unfamiliar files instead of blindly trusting their extensions.</p></article>
+          <article><span>07</span><h3>Automation</h3><p>Use these commands in shell scripts for file inspection and maintenance tasks.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section learning-section">
+      <div class="container two-column">
+        <div><span class="section-label">09 / WHAT I LEARNED</span><h2>Learning outcomes</h2><p>After preparing this topic and performing the practical activity, I gained a better understanding of Linux file handling.</p></div>
+        <ol class="learning-list">
+          <li>I learned to use <code>ls -l</code> to view files, directories and their details.</li>
+          <li>I understood how to identify file types using the symbols shown in the terminal.</li>
+          <li>I learned to use the <code>file</code> command to check the actual type of a file.</li>
+          <li>I understood read, write and execute permissions for owner, group and others.</li>
+          <li>The practical activity gave me more confidence in using Linux commands.</li>
+          <li>I also understood how useful shell scripting can be in the modern world.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="conclusion-section">
+      <div class="container conclusion-card">
+        <span class="section-label">10 / CONCLUSION</span>
+        <h2>Small commands, useful knowledge.</h2>
+        <p>Through this topic, I understood that Linux gives us simple commands to learn more about files and directories. The <code>ls -l</code> command helps us view file types, permissions and other details, while <code>file</code> provides a more descriptive identification of a file's format. Using both commands together is a useful basic skill for working in Linux, and the practical activity made the terminal easier for me to understand.</p>
+      </div>
+    </section>
+
+    <section class="section references-section">
+      <div class="container">
+        <span class="section-label">11 / LEARN MORE</span>
+        <h2>References</h2>
+        <p class="section-intro">The following documentation and websites were referred to for understanding the commands.</p>
+        <div class="reference-list">
+          <a href="https://www.gnu.org/software/coreutils/manual/html_node/ls-invocation.html" target="_blank" rel="noopener">GNU Coreutils Manual – ls <span>↗</span></a>
+          <a href="https://man7.org/linux/man-pages/man1/ls.1.html" target="_blank" rel="noopener">Linux man-pages – ls(1) <span>↗</span></a>
+          <a href="https://man7.org/linux/man-pages/man1/file.1.html" target="_blank" rel="noopener">Linux man-pages – file(1) <span>↗</span></a>
+          <a href="https://www.w3schools.com" target="_blank" rel="noopener">W3Schools <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div><a class="brand footer-brand" href="#top"><span class="brand-icon">&gt;_</span><span>Linux<span class="brand-light">Notes</span></span></a><p>A Shell Scripting learning blog · Module 2</p></div>
+      <div class="student-details"><strong>Prepared by</strong><p>Joogansh Chetan Kotecha · Vinil Nitin Modi · Avneesh Abhijit Pimpare</p><p>FY ECS-1 | Academic Year 2026–2027</p></div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> LinuxNotes</span><a href="#top">Back to top ↑</a></div>
+  </footer>
+  <script src="script1.js"></script>
+</body>
+</html>
